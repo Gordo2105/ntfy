@@ -12,6 +12,6 @@ jobs:
       - name: Notify ntfy.sh
         env:
           NTFY_URL: ntfy.sh/testemysql537
-          MESSAGE: 'alterações efetuadas'
+          MESSAGE: 'Foram adicionados ficheiros'
         run: |
-          curl -X POST -d "message=$MESSAGE" $NTFY_URL
+          curl -X POST -d "$MESSAGE" $NTFY_URL
