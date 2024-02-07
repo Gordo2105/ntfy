@@ -1,0 +1,6 @@
+name: notify
+
+on: push
+
+jobs:
+curl -d "matate" ntfy.sh/testemysql537
