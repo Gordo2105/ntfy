@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Notify ntfy.sh
         env:
-          NTFY_URL: ntfy.sh/testemysql537
+          NTFY_URL: ntfy.sh/gordoromano
           MESSAGE: 'Foram adicionados ficheiros'
         run: |
           curl -X POST -d "$MESSAGE" $NTFY_URL
