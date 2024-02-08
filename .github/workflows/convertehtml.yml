@@ -8,7 +8,7 @@ permissions:
   contents: write      
 
 jobs:
-  convert_and_deploy:
+  convert:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,9 +31,10 @@ jobs:
           fi
         done
 
-    - name: Commit and push changes to site branch
+    - name: Commit and push changes
       run: |
-        git checkout -b site || git checkout site
-        git add .
-        git commit -m "Convert TXT to HTML and send"
-        git push origin HEAD:site
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add ./*.html
+        git commit -m "Convert TXT to HTML"
+        git push
