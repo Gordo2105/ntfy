@@ -1,4 +1,4 @@
-name: Notify ntfy.sh on file push
+name: Notifica ntfy.sh quando acontece push
 
 on:
   push:
@@ -9,9 +9,9 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Notify ntfy.sh
+      - name: Notifica ntfy.sh
         env:
           NTFY_URL: ntfy.sh/gordoromano
           MESSAGE: 'Foram efetuadas alterações'
         run: |
-          curl -X POST -H "Title: Github" -H "Tags:skull" -H "Priority: max" -d "$MESSAGE" $NTFY_URL
+          curl -X POST -H "Title: Github" -H "Tags:skull" -H "Priority: urgent" -d "$MESSAGE" $NTFY_URL
