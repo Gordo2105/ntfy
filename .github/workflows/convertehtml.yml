@@ -9,34 +9,41 @@ permissions:
   contents: write      
 
 jobs:
-  convert_and_commit:
+  convert_and_send:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout source repository
       uses: actions/checkout@v2
       
     - name: Install pandoc
       run: |
         sudo apt-get update
         sudo apt-get install -y pandoc
-        
-    - name: Convert TXT to HTML and erase TXT files
+
+    - name: Convert TXT to HTML
       run: |
         for file in *.txt; do
           if [ -f "$file" ]; then
             filename=$(basename -- "$file")
-            filename_without_ext="${filename%.*}"
-            pandoc -s "$file" -o "$filename_without_ext.html"
-            rm "$file"
+            extension="${filename##*.}"
+            filename="${filename%.*}"
+            pandoc -s "$file" -o "$filename.html"
           fi
         done
-        
-    - name: Commit changes
+
+    - name: Clone destination repository
+      run: git clone https://github.com/Gordo2105/la.github.io.git.git destination-repo
+      
+    - name: Copy HTML files to destination repository
       run: |
-        git config --global user.email "github-actions@github.com"
-        git config --global user.name "GitHub Actions"
-        git add *.html
-        git add -u  # Add removed files
-        git commit -m "Convert .txt to .html files and erase original .txt files"
-        git push
+        cp *.html destination-repo
+        
+    - name: Commit and push changes to destination repository
+      run: |
+        cd destination-repo
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Convert TXT to HTML and send"
+        git push https://$DESTINATION_REPO_TOKEN@github.com/Gordo2105/la.github.io.git HEAD:main
