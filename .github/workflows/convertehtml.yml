@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout source repository
+    - name: Checkout repository
       uses: actions/checkout@v2
       
     - name: Install pandoc
@@ -31,28 +31,9 @@ jobs:
           fi
         done
 
-    - name: Setup SSH
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.DEPLOY_KEY }}
-
-    - name: Clone destination repository
-      run: git clone https://github.com/Gordo2105/ntfy.git destination-repo
-
-    - name: Switch to site branch
+    - name: Commit and push changes to site branch
       run: |
-        cd destination-repo
         git checkout -b site || git checkout site
-
-    - name: Copy HTML files to destination repository
-      run: |
-        cp ../source-repo/*.html .
-
-    - name: Commit and push changes to destination repository
-      working-directory: destination-repo
-      run: |
-        git config --local user.email "1022061@alunos.ruizcosta.edu.pt"
-        git config --local user.name "Gordo2105"
         git add .
         git commit -m "Convert TXT to HTML and send"
-        git push origin site
+        git push origin HEAD:site
