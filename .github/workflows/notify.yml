@@ -14,4 +14,4 @@ jobs:
           NTFY_URL: ntfy.sh/gordoromano
           MESSAGE: 'Foram efetuadas alterações'
         run: |
-          curl -X POST -H "Tags:skull" -H "Priority: urgent" -d "$MESSAGE" $NTFY_URL
+          curl -X POST -H "Title: Github" -H "Tags:skull" -H "Priority: max" -d "$MESSAGE" $NTFY_URL
