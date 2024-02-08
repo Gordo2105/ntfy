@@ -1,0 +1,36 @@
+name: Convert to HTML
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Install pandoc
+      run: |
+        sudo apt update
+        sudo apt install pandoc
+      
+    - name: Convert text files to HTML
+      run: |
+        for file in *.txt; do
+          if [ -f "$file" ]; then
+            filename="${file%.*}"
+            pandoc -s "$file" -o "${filename}.html"
+          fi
+        done
+      
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Convert text files to HTML"
+        git push
