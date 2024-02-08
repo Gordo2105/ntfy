@@ -36,7 +36,7 @@ jobs:
         done
 
     - name: Clone destination repository
-      run: https://github.com/Gordo2105/la.github.io.git destination-repo
+      run: git clone https://github.com/Gordo2105/la.github.io.git destination-repo
       
     - name: Copy HTML files to destination repository
       run: |
