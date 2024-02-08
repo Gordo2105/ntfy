@@ -1,4 +1,4 @@
-name: Convert and Deploy HTML
+name: Converte e retorna em HTML
 
 on:
   push:
@@ -45,6 +45,7 @@ jobs:
         git config --local user.name "Gordo2105"
         git add .
         git commit -m "Convert TXT to HTML and deploy"
+        git remote set-url origin https://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@github.com/Gordo2105/la.github.io
         git push origin main
 
 
