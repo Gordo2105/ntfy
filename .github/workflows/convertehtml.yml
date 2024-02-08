@@ -8,9 +8,9 @@ permissions:
   contents: write      
 
 jobs:
-  convert_and_substitute:
+  convert_and_commit:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -20,14 +20,14 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y pandoc
         
-    - name: Convert TXT to HTML and substitute
+    - name: Convert TXT to HTML and erase TXT files
       run: |
         for file in *.txt; do
           if [ -f "$file" ]; then
             filename=$(basename -- "$file")
             filename_without_ext="${filename%.*}"
             pandoc -s "$file" -o "$filename_without_ext.html"
-            mv "$filename_without_ext.html" "$file"
+            rm "$file"
           fi
         done
         
@@ -35,6 +35,6 @@ jobs:
       run: |
         git config --global user.email "github-actions@github.com"
         git config --global user.name "GitHub Actions"
-        git add *.txt
-        git commit -m "Convert .txt to .html files and substitute"
+        git add *.html
+        git commit -m "Convert .txt to .html files and erase original .txt files"
         git push
