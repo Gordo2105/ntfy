@@ -1,19 +1,18 @@
-name: Convert TXT to HTML
+name: Convert and Deploy HTML
 
 on:
   push:
     branches:
       - main
-permissions:
-  contents: write
+
 jobs:
-  convert:
+  convert_and_deploy:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-      
+
     - name: Install pandoc
       run: |
         sudo apt-get update
@@ -40,10 +39,10 @@ jobs:
     - name: Commit and push changes to destination repository
       working-directory: destination-repo
       run: |
-        
-        git config --local user.email "1022061@alunos.ruizcosta.edu.pt"
+        git config --local user.email "1022061.alunos.ruizcosta.edu.pt"
         git config --local user.name "Gordo2105"
         git remote set-url origin https://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@github.com/Gordo2105/la.github.io
         git add .
         git commit -m "Convert TXT to HTML and deploy"
         git push origin main
+
