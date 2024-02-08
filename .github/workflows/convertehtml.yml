@@ -30,10 +30,18 @@ jobs:
           fi
         done
 
-    - name: Commit and push changes
+    - name: Clone destination repository
+      run: git clone https://github.com/Gordo2105/la.github.io.git destination-repo
+
+    - name: Copy HTML files to destination repository
+      run: |
+        cp *.html destination-repo
+
+    - name: Commit and push changes to destination repository
+      working-directory: destination-repo
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add ./*.html
-        git commit -m "Convert TXT to HTML"
-        git push
+        git add .
+        git commit -m "Convert TXT to HTML and deploy"
+        git push origin main
