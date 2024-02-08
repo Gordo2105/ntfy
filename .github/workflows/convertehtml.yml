@@ -14,7 +14,7 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
+      
     - name: Install pandoc
       run: |
         sudo apt-get update
@@ -31,6 +31,13 @@ jobs:
           fi
         done
 
+    - name: Add SSH key and set permissions
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.DEPLOY_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+
     - name: Clone destination repository
       run: git clone https://github.com/Gordo2105/la.github.io.git destination-repo
 
@@ -41,11 +48,8 @@ jobs:
     - name: Commit and push changes to destination repository
       working-directory: destination-repo
       run: |
-        git config --local user.email "1022061@alunos.ruizcosta.edu.pt"
-        git config --local user.name "Gordo2105"
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
         git add .
         git commit -m "Convert TXT to HTML and deploy"
-        git remote set-url origin https://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@github.com/Gordo2105/la.github.io
         git push origin main
-
-
