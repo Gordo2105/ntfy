@@ -33,7 +33,7 @@ jobs:
         done
 
     - name: Clone destination repository
-      run: git clone https://github.com/Gordo2105/la.github.io.git.git destination-repo
+      run: https://github.com/Gordo2105/la.github.io.git destination-repo
       
     - name: Copy HTML files to destination repository
       run: |
@@ -46,4 +46,4 @@ jobs:
         git config --local user.name "GitHub Action"
         git add .
         git commit -m "Convert TXT to HTML and send"
-        git push https://$DESTINATION_REPO_TOKEN@github.com/Gordo2105/la.github.io.git HEAD:main
+        git push https://$TOKEN@github.com/Gordo2105/la.github.io.git HEAD:main
