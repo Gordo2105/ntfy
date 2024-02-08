@@ -13,15 +13,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Faz checkout ao repositório
       uses: actions/checkout@v2
       
-    - name: Install pandoc
+    - name: Instalar pandoc
       run: |
         sudo apt-get update
         sudo apt-get install -y pandoc
         
-    - name: Convert TXT to HTML and erase TXT files
+    - name: Converte txt em html e apaga txt
       run: |
         for file in *.txt; do
           if [ -f "$file" ]; then
@@ -32,7 +32,7 @@ jobs:
           fi
         done
         
-    - name: Commit changes
+    - name: Faz commit às mudanças
       run: |
         git config --global user.email "github-actions@github.com"
         git config --global user.name "GitHub Actions"
