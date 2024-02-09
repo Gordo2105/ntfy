@@ -28,10 +28,15 @@ jobs:
           fi
         done
         
+    - name: Create destination directory if not exist
+      run: mkdir -p destination-repo
+      
+    - name: Copy HTML file to destination repository
+      run: cp *.html destination-repo/
+      
     - name: Send HTML file to destination repository
       run: |
-        cp *.html Gordo2105/la.github.io
-        cd Gordo2105/la.github.io
+        cd destination-repo
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
