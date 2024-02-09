@@ -1,4 +1,6 @@
-on:  
+name: Copy File After Convert HTML
+
+on:
   workflow_run:
     workflows: ["convertehtml.yml"]
     types:
@@ -7,11 +9,13 @@ on:
 jobs:
   copy-file:
     runs-on: ubuntu-latest
+    needs: convert-html
+  
     steps:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Pushes test file
+    - name: Push test file
       uses: dmnemec/copy_file_to_another_repo_action@main
       env:
         API_TOKEN_GITHUB: ${{ secrets.TOKEN }}
@@ -20,4 +24,4 @@ jobs:
         destination_repo: 'Gordo2105/la.github.io'
         user_email: '1022061@alunos.ruizcosta.edu.pt'
         user_name: 'Gordo2105'
-        commit_message: 'Manda pff' 
+        commit_message: 'Manda pff'
