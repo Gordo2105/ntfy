@@ -1,4 +1,4 @@
-name: Converte e envia para repositório HTML
+nname: Converte e retorna em HTML
 
 on:
   push:
@@ -6,21 +6,21 @@ on:
       - main
 
 permissions:
-  contents: write
+  contents: write      
 
 jobs:
-  convert_and_send:
+  convert_and_commit:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout do repositório
+    - name: Faz checkout ao repositório
       uses: actions/checkout@v2
-
+      
     - name: Instalar pandoc
       run: |
         sudo apt-get update
         sudo apt-get install -y pandoc
-
+        
     - name: Converte txt em html e apaga txt
       run: |
         for file in *.txt; do
@@ -31,25 +31,12 @@ jobs:
             rm "$file"
           fi
         done
-
-    - name: Configura as credenciais do Git
+        
+    - name: Faz commit às mudanças
       run: |
-        git config --local user.email "1022061@alunos.ruizcosta.edu.pt"
-        git config --local user.name "Gordo2105"
-
-    - name: Adiciona arquivos HTML para commit
-      run: |
+        git config --global user.email "github-actions@github.com"
+        git config --global user.name "GitHub Actions"
         git add *.html
-        git add -u  # Adiciona arquivos removidos
-
-    - name: Commit das mudanças
-      run: |
-        git commit -m "Converter arquivos .txt para .html e apagar arquivos .txt originais"
-
-    - name: Push das mudanças para o repositório de destino
-      run: |
-        git push https://$TOKEN@github.com/Gordo2105/la.github.io HEAD:main
-      env:
-        TOKEN: ${{ secrets.TOKEN }}  # Substitua "TOKEN" pelo nome do seu segredo que contém o token de acesso
-
-
+        git add -u  # Add removed files
+        git commit -m "Convert .txt to .html files and erase original .txt files"
+        git push
