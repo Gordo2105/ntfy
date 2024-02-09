@@ -30,8 +30,8 @@ jobs:
         
     - name: Send HTML file to destination repository
       run: |
-        cp *.html destination-repo/
-        cd destination-repo
+        cp *.html Gordo2105/la.github.io
+        cd Gordo2105/la.github.io
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
