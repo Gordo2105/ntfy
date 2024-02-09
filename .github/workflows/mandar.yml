@@ -1,5 +1,8 @@
-on: push
-
+on:
+  workflow_run:
+    workflows: ["Converte e retorna em HTML"]
+    types:
+      - completed
 jobs:
   copy-file:
     runs-on: ubuntu-latest
