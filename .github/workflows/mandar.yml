@@ -2,14 +2,13 @@ name: Push File
 
 on:
   workflow_run:
-    workflows: ["/.github/workflows/convertehtml.yml"]
+    workflows: ["convertehtml.yml"]
     types:
       - completed
 
 jobs:
   copy-file:
     runs-on: ubuntu-latest
-    needs: convert-html
 
     steps:
     - name: Checkout
