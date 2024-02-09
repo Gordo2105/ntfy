@@ -37,6 +37,6 @@ jobs:
         git config --global user.email "github-actions@github.com"
         git config --global user.name "GitHub Actions"
         git add *.html
-        git add -u  # Add removed files
+        git add -u
         git commit -m "Convert .txt to .html files and erase original .txt files"
         git push
