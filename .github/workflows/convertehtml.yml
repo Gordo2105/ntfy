@@ -43,5 +43,5 @@ jobs:
         git commit -m "Convert TXT to HTML and send"
         git push https://$TOKEN@github.com/Gordo2105/la.github.io.git HEAD:main
       env:
-        TOKEN: ${{ secrets.token }}
+        TOKEN: ${{ secrets.TOKEN }}
 
