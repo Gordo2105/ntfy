@@ -36,9 +36,11 @@ jobs:
       
     - name: Send HTML file to destination repository
         cd destination-repo
-        git config --local user.email "github-actions@github.com"
-        git config --local user.name "github-actions[bot]"
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
         git add .
         git commit -m "Convert TXT to HTML and send"
-        git push https://github-actions:${{ secrets.token }}@github.com/Gordo2105/la.github.io.git HEAD:main
+        git push https://github.com/Gordo2105/la.github.io.git HEAD:main
+      env:
+        TOKEN: ${{ secrets.token }}
 
