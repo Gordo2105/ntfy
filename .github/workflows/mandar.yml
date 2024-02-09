@@ -2,7 +2,7 @@ name: Push File
 
 on:
   workflow_run:
-    workflows: ["convertehtml.yml"]
+    workflows: ["/.github/workflows/convertehtml.yml"]
     types:
       - completed
 
