@@ -1,4 +1,8 @@
-on: push
+on:  
+  workflow_run:
+    workflows: ["convertehtml.yml"]
+    types:
+      - completed
 
 jobs:
   copy-file:
