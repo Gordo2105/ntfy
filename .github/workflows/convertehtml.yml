@@ -1,4 +1,4 @@
-nname: Converte e retorna em HTML
+name: Converte e retorna em HTML
 
 on:
   push:
